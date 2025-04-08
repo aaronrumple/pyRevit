@@ -10,9 +10,16 @@ Examples:
 import re
 import copy
 from itertools import tee
-from collections import OrderedDict, Callable   #pylint: disable=E0611
+from collections import OrderedDict   #pylint: disable=E0611
+from pyrevit.compat import PY2, PY3
+# Cpython 3 moved Callable from collections to collections.abc import collections. collections.type is discouraged.
+# Cpython 2 uses collections import Callable
+# IprnPython 2 uses collections import Callable. IronPython 3 usess either collections import Callable collections.abc import Callable
+if  PY3:
+    from collections.abc import Callable   #pylint: disable=E0611
+else:
+    from collections import Callable   #pylint: disable=E0611
 
-from pyrevit.compat import PY2
 if PY2:
     from itertools import izip as zip
 
